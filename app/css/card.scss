@@ -42,7 +42,7 @@
   mask-composite: intersect;
   mask-clip: padding-box, border-box;
   opacity: var(--active);
-  transition: opacity 1s;
+  transition: opacity 1s, --start 0.1s linear;
 }
 
 .glow-card::before {
@@ -63,7 +63,7 @@
   mask-clip: padding-box, border-box;
   mask-composite: intersect;
   opacity: var(--active);
-  transition: opacity 1s;
+  transition: opacity 1s, --start 0.1s linear;
 }
 
 .glow-card::after {
@@ -81,7 +81,7 @@
   background-attachment: fixed;
   border-radius: 12px;
   opacity: var(--active, 0);
-  transition: opacity 1s;
+  transition: opacity 1s, --start 0.1s linear;
   --alpha: 0;
   inset: 0;
   border: 2px solid transparent;
@@ -93,4 +93,19 @@
   filter: brightness(1.5);
   mask-clip: padding-box, border-box;
   mask-composite: intersect;
+}
+
+@media (max-width: 767px) {
+  .glows::after,
+  .glows::before,
+  .glow-card::before,
+  .glow-card::after {
+    transition: opacity 1s, --start 0.05s linear;
+    animation: glowPulse 3s infinite alternate;
+  }
+
+  @keyframes glowPulse {
+    0% { opacity: 0.7; }
+    100% { opacity: 1; }
+  }
 }

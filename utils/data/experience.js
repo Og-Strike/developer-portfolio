@@ -1,20 +1,23 @@
 export const experiences = [
   {
     id: 1,
-    title: 'Software Engineer I',
-    company: "Teton Private Ltd.",
-    duration: "(Jan 2022 - Present)"
+    title: 'Mobile App Developer Intern',
+    company: "MobiArmour",
+    duration: "(May 2025 - Present)",
+    link: "https://armour.mobi/"
   },
   {
     id: 2,
     title: "FullStack Developer",
-    company: "Fiverr (freelance)",
-    duration: "(Jun 2021 - Jan 2022)"
+    company: "Technovate 2025 Website",
+    duration: "(Feb 2025 - Mar 2025)",
+    link: "https://amity.edu/aset/technovate2025/"
   },
   {
     id: 3,
-    title: "Self Employed",
-    company: "Code and build something in everyday.",
-    duration: "(Jan 2018 - Present)"
+    title: "Software Development",
+    company: "AKM - INNOVATORS",
+    duration: "(Jan 2020 - Present)",
+    link: "https://www.linkedin.com/company/akm-innovators"
   }
 ]
