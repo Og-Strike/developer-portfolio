@@ -25,17 +25,23 @@ function HeroSection() {
   const tracks = [
     { title: "Next to You", url: "./music/nexttoyou.mp3" },
     { title: "Summer Ghost", url: "./music/summerghost.mp3" },
-    { title: "Again", url: "./music/again.mp3" }
+    { title: "Again", url: "./music/again.mp3" },
   ];
 
-  const currentTrack = tracks[currentTrackIndex];
+  const currentTrack =
+    tracks.length > 0 && currentTrackIndex >= 0 && currentTrackIndex < tracks.length
+      ? tracks[currentTrackIndex]
+      : null;
 
   const handlePlayPause = useCallback(() => {
     const audio = audioRef.current;
     if (!audio) return;
 
     if (audio.paused) {
-      audio.play().then(() => setIsPlaying(true)).catch(console.error);
+      audio
+        .play()
+        .then(() => setIsPlaying(true))
+        .catch(console.error);
     } else {
       audio.pause();
       setIsPlaying(false);
@@ -43,38 +49,45 @@ function HeroSection() {
   }, []);
 
   const handleNext = useCallback(() => {
+    if (tracks.length === 0) return;
     setCurrentTrackIndex((prev) => (prev + 1) % tracks.length);
     setIsPlaying(true);
   }, [tracks.length]);
 
   const handlePrev = useCallback(() => {
+    if (tracks.length === 0) return;
     setCurrentTrackIndex((prev) => (prev - 1 + tracks.length) % tracks.length);
     setIsPlaying(true);
   }, [tracks.length]);
 
   useEffect(() => {
     const audio = audioRef.current;
-    if (!audio) return;
+    if (!audio || !currentTrack) return;
+
     audio.src = currentTrack.url;
 
     if (isPlaying) {
-      audio.play().catch((err) => {
-        console.warn("Autoplay failed:", err);
-        setIsPlaying(false);
-      });
+      audio
+        .play()
+        .catch((err) => {
+          console.warn("Autoplay failed:", err);
+          setIsPlaying(false);
+        });
     }
-  }, [currentTrack.url]);
+  }, [currentTrack?.url, isPlaying]);
 
   useEffect(() => {
     const audio = audioRef.current;
-    if (!audio || !allowMusic) return;
+    if (!audio || !allowMusic || !currentTrack) return;
 
-    if (allowMusic) {
-      audio.play().then(() => setIsPlaying(true)).catch((err) => {
+    audio.src = currentTrack.url;
+    audio
+      .play()
+      .then(() => setIsPlaying(true))
+      .catch((err) => {
         console.warn("Autoplay blocked:", err);
         setIsPlaying(false);
       });
-    }
   }, [allowMusic]);
 
   useEffect(() => {
@@ -209,7 +222,7 @@ function HeroSection() {
       {/* Music Title and Controls */}
       <div className="flex items-center space-x-2 text-white text-xs bg-[#0d1224] border border-[#1b2c68a0] rounded-lg px-2 py-1 shadow">
         <span className="text-[#16f2b3] font-semibold truncate max-w-[200px]">
-         Playing: {currentTrack.title}
+         Playing: {currentTrack?.title || "No Track Playing"}
         </span>
         <button onClick={handlePrev} className="p-1 hover:text-[#16f2b3] transition-colors">
           <SkipBack size={14} />
