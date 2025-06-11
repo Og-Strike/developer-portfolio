@@ -25,7 +25,7 @@ function HeroSection() {
   const tracks = [
     { title: "Next to You", url: "./music/nexttoyou.mp3" },
     { title: "Summer Ghost", url: "./music/summerghost.mp3" },
-    { title: "Again", url: "./music/again.mp3" },
+    { title: "Again", url: "./music/again.mp3" }
   ];
 
   const currentTrack = tracks[currentTrackIndex];
@@ -188,7 +188,7 @@ function HeroSection() {
 </div>
 <div className="order-1 lg:order-2 relative rounded-lg">
   {/* Animated Gradient Border Layer */}
-  <div className="absolute inset-0 animate-border overflow-hidden rounded-lg border-2 border-transparent bg-[length:400%_400%] bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 blur-sm"></div>
+  <div className="absolute inset-0 animate-border overflow-hidden rounded-lg border-2 border-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 blur-sm"></div>
 
   {/* Main Content Layer */}
   <div className="relative z-10 from-[#0d1224] border-[#1b2c68a0] rounded-lg border bg-gradient-to-r to-[#0a0d37]">
