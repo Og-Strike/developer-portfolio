@@ -18,11 +18,11 @@ export default async function Home() {
           <Navbar/>
           <HeroSection />
           <AboutSection />
-          {/* <Experience /> */}
-          {/* <Skills />
-          <Education /> */}
-          {/* <Certifications />
-          <Achievements /> */}
+          <Experience />
+          <Skills />
+          <Education />
+          <Certifications />
+          <Achievements />
           <Footer />
         </>
     </div>
