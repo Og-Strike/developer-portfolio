@@ -1,4 +1,3 @@
-// @flow strict
 "use client";
 
 import { useCallback } from "react";
