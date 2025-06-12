@@ -6,6 +6,8 @@ import HeroSection from './components/homepage/hero-section';
 import Projects from './components/homepage/projects';
 import Skills from './components/homepage/skills';
 import Achievements from './components/homepage/achivements';
+import Navbar from './components/navbar';
+import Footer from './components/footer';
 
 export default async function Home() {
 
@@ -13,14 +15,9 @@ export default async function Home() {
     
     <div suppressHydrationWarning>
       <>
-          <HeroSection />
-          <AboutSection />
-          <Experience />
-          <Skills />
-          <Projects />
-          <Education />
-          <Certifications />
-          <Achievements />
+          <Navbar />
+          <h1 className=" text-white">Strike's Portfolio</h1>
+          <Footer />
         </>
     </div>
   );
