@@ -3,6 +3,8 @@ import "./css/card.scss";
 import "./css/globals.scss";
 import ClientWrapper from "./ClientWrapper";
 import { MusicPermissionProvider } from "./context/MusicPermissionContext";
+import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,6 +22,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
+        <Analytics />
+        <SpeedInsights />
         <MusicPermissionProvider>
         <ClientWrapper>{children}</ClientWrapper>
         </MusicPermissionProvider>
