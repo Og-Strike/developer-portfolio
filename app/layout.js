@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import "./css/card.scss";
 import "./css/globals.scss";
+import { MusicPermissionProvider } from "./context/MusicPermissionContext";
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
@@ -22,8 +23,9 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <Analytics />
         <SpeedInsights />
-
+        <MusicPermissionProvider>
         {children}
+        </MusicPermissionProvider>
       </body>
     </html>
   );

@@ -15,8 +15,15 @@ export default async function Home() {
     
     <div suppressHydrationWarning>
       <>
-          <Navbar />
-          <h1 className=" text-white">Strike's Portfolio</h1>
+          <Navbar/>
+          <HeroSection />
+          <AboutSection />
+          <Experience />
+          <Skills />
+          <Projects />
+          <Education />
+          <Certifications />
+          <Achievements />
           <Footer />
         </>
     </div>
