@@ -20,8 +20,8 @@ function Navbar() {
     <nav className="bg-transparent">
       <div className="flex items-center justify-between py-5 px-6 md:px-12">
         {/* Logo */}
-        <Link href="/" className="text-[#16f2b3] text-3xl font-bold">
-          𝒮𝓉𝓇𝒾𝓀𝑒
+        <Link href="/" className="text-[#16f2b3] text-3xl font-light italic ">
+          Strike
         </Link>
 
         {/* Hamburger for sm and md (visible < lg) */}

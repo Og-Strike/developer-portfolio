@@ -32,7 +32,7 @@ const ScrollToTop = () => {
 
   return (
     <button className={btnCls} onClick={onClickBtn}>
-      <FaArrowUp />
+      <FaArrowUp className="text-white" />
     </button>
   );
 };

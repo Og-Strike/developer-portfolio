@@ -17,7 +17,7 @@ export const experiences = [
     id: 3,
     title: "Software Development",
     company: "AKM - INNOVATORS",
-    duration: "(Jan 2020 - Present)",
+    duration: "(Jun 2022 - Jun 2025)",
     link: "https://www.linkedin.com/company/akm-innovators"
   }
 ]

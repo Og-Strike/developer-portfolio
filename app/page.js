@@ -9,6 +9,7 @@ import Achievements from './components/homepage/achivements';
 import Navbar from './components/navbar';
 import Footer from './components/footer';
 import ContactSection from './components/homepage/contact';
+import Projects from './components/homepage/projects';
 
 export default async function Home() {
 
@@ -21,6 +22,7 @@ export default async function Home() {
           <AboutSection />
           <Experience />
           <Skills />
+          <Projects />
           <Education />
           <Certifications />
           <Achievements />

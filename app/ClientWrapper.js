@@ -3,7 +3,10 @@
 import { useMusicPermission } from "./context/MusicPermissionContext";
 import React, { useState, useEffect } from 'react';
 import "react-toastify/dist/ReactToastify.css";
+
+import Footer from "./components/footer";
 import ScrollToTop from "./components/helper/scroll-to-top";
+import Navbar from "./components/navbar";
 import SplashScreen from "./components/homepage/SplashScreen";
 
 
@@ -64,14 +67,17 @@ export default function ClientLayout({ children }) {
               </div>
             </div>
           )}
-        <div className="fade-in">
+          <div className="min-h-screen flex flex-col text-white">
 
-          <main className="min-h-screen relative mx-auto px-6 sm:px-12 lg:max-w-[70rem] xl:max-w-[76rem] 2xl:max-w-[92rem] text-white">
-            {children}
-            <ScrollToTop />
-            <div className="w-[100px] h-[100px] bg-violet-100 rounded-full absolute top-6 left-[42%] translate-x-1/2 filter blur-3xl opacity-20"></div>
-          </main>
-        </div>
+            <main className="fade-in flex-grow relative mx-auto px-6 sm:px-12 lg:max-w-[70rem] xl:max-w-[76rem] 2xl:max-w-[92rem]">
+              {children}
+              <div className="w-[100px] h-[100px] bg-violet-100 rounded-full absolute top-6 left-[42%] translate-x-1/2 filter blur-3xl opacity-20"></div>
+            </main>
+
+          </div>
+
+          {/* Keep this OUTSIDE main */}
+          <ScrollToTop />
         </>
       )}
 

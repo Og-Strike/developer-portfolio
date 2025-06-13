@@ -5,6 +5,8 @@ import ClientWrapper from "./ClientWrapper";
 import { MusicPermissionProvider } from "./context/MusicPermissionContext";
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import ScrollToTop from "./components/helper/scroll-to-top";
+
 
 const inter = Inter({ subsets: ["latin"] });
 

@@ -59,7 +59,7 @@ function Experience() {
                       <BsPersonWorkspace size={36} />
                     </div>
                     <div>
-                      <p className="text-base sm:text-base mb-2 font-medium uppercase">
+                      <p className="lg:text-lg md:text-base mb-2 font-medium uppercase">
                         {experience.title}
                       </p>
                       <div className="flex items-center gap-2 text-sm sm:text-sm ">
