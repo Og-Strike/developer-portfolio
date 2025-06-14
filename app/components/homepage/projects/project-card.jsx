@@ -1,5 +1,6 @@
 'use client';
 import * as React from 'react';
+import Image from 'next/image';
 import {
   FaGithub,
   FaEye,
@@ -29,12 +30,12 @@ function ProjectCard({ project }) {
     setProgress(0);
   };
 
-  const closeModal = () => {
+  const closeModal = React.useCallback(() => {
     setModalOpen(false);
     setZoom(false);
-  };
+  }, []);
 
-  const nextImage = () => {
+  const nextImage = React.useCallback(() => {
     setFadeState("fade-out");
     setZoom(false);
     setTimeout(() => {
@@ -42,9 +43,9 @@ function ProjectCard({ project }) {
       setFadeState("fade-in");
       setProgress(0);
     }, 300);
-  };
+  }, [project.images.length]);
 
-  const prevImage = () => {
+  const prevImage = React.useCallback(() => {
     setFadeState("fade-out");
     setZoom(false);
     setTimeout(() => {
@@ -54,7 +55,7 @@ function ProjectCard({ project }) {
       setFadeState("fade-in");
       setProgress(0);
     }, 300);
-  };
+  }, [project.images.length]);
 
   // Progress bar interval (increments only)
   React.useEffect(() => {
@@ -85,7 +86,7 @@ function ProjectCard({ project }) {
     };
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
-  }, [isModalOpen]);
+  }, [isModalOpen, nextImage, prevImage, closeModal]);
 
   return (
     <div className="relative rounded-lg border border-[#1b2c68a0] h-full bg-gradient-to-r from-[#0d1224] to-[#0a0d37] w-full overflow-hidden animated-border">
@@ -107,11 +108,14 @@ function ProjectCard({ project }) {
                 onMouseLeave={() => setHovered(false)}
                 onClick={handleImageClick}
               >
-                <img
+                <Image
                   src={project.images[currentImageIndex]}
-
                   alt={`project-image-${currentImageIndex}`}
+                  width={800}
+                  height={400}
                   className={`max-w-full max-h-[30vh] object-contain rounded transition-transform duration-300 ${zoom ? 'scale-100' : 'scale-100'}`}
+                  style={{ width: 'auto', height: '30vh' }}
+                  priority={true}
                 /> 
               </div>
 
@@ -192,20 +196,20 @@ function ProjectCard({ project }) {
           </div>
           <div>
             <span className="ml-6 mr-2 text-white">name:</span>
-            <span className="text-gray-400">'</span>
+            <span className="text-gray-400">&#39;</span>
             <span className="text-amber-300">{project.name}</span>
-            <span className="text-gray-400">',</span>
+            <span className="text-gray-400">&#39;,</span>
           </div>
           <div className="ml-6 mr-2">
             <span className="text-white">tools:</span>
-            <span className="text-gray-400"> ['</span>
+            <span className="text-gray-400"> [&#39;</span>
             {project.tools.map((tag, i) => (
               <React.Fragment key={i}>
                 <span className="text-amber-300">{tag}</span>
-                {i !== project.tools.length - 1 && <span className="text-gray-400">', '</span>}
+                {i !== project.tools.length - 1 && <span className="text-gray-400">&#39;, &#39;</span>}
               </React.Fragment>
             ))}
-            <span className="text-gray-400">'],</span>
+            <span className="text-gray-400">&#39;],</span>
           </div>
           <div>
             <span className="ml-6 mr-2 text-white">myRole:</span>
