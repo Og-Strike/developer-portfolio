@@ -105,10 +105,10 @@ React.useEffect(() => {
       {/* Modal */}
 {isClient && isModalOpen && project.images?.length > 0 && (
   <div
-    className="fixed left-0 sm:w-auto w-full z-50 flex justify-center"
+    className="fixed left-0 w-full z-50 flex justify-center"
     style={{ top: `${scrollYRef.current}px` }}
   >
-    <div className="bg-[#1e1e2f] p-4 rounded-lg sm:w-auto max-w-4xl w-full mt-10">
+    <div className="bg-[#1e1e2f] p-4 rounded-lg max-w-4xl w-full mt-20">
         
 
               <div className={`relative flex-grow min-h-[50vh] max-h-[60vh] flex items-center justify-center ${fadeState}`} style={{ transition: 'opacity 300ms ease-in-out' }}>
