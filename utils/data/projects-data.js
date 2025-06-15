@@ -7,8 +7,8 @@ const folders = {
     BillWizard: './public/projectsimg/BillWizard',
     SocialSpy: './public/projectsimg/SocialSpy',
     TrendTrace: './public/projectsimg/TrendTrace',
-    NeoLight: './public/projectsimg/Neolight',
-    ExamSection: './public/projectsimg/ExamSection'
+    Neolight: './public/projectsimg/Neolight',
+    ExamSection: './public/projectsimg/ExamSection',
 };
 
 let images = {};
@@ -23,6 +23,7 @@ Object.keys(folders).forEach(folder => {
         console.warn(`Folder not found: ${folderPath}`);
     }
 });
+console.log(images); // Log the images object to verify
 
 export const projectsData = [
     {
