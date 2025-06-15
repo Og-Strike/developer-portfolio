@@ -103,7 +103,7 @@ React.useEffect(() => {
   return (
     <div className="relative rounded-lg border border-[#1b2c68a0] h-full bg-gradient-to-r from-[#0d1224] to-[#0a0d37] w-full overflow-hidden animated-border">
       {/* Modal */}
-{isClient && isModalOpen && project.images?.length > 0 && (
+{isModalOpen && project.images?.length > 0 && (
   <div
     className="fixed left-0 w-full z-50 flex justify-center"
     style={{ top: `${scrollYRef.current}px` }}
