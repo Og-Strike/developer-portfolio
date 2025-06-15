@@ -7,7 +7,7 @@ const folders = {
     BillWizard: './public/projectsimg/BillWizard',
     SocialSpy: './public/projectsimg/SocialSpy',
     TrendTrace: './public/projectsimg/TrendTrace',
-    NeoLight: './public/projectsimg/NeoLight',
+    NeoLight: './public/projectsimg/Neolight',
     ExamSection: './public/projectsimg/ExamSection'
 };
 
