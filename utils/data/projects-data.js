@@ -23,7 +23,6 @@ Object.keys(folders).forEach(folder => {
         console.warn(`Folder not found: ${folderPath}`);
     }
 });
-console.log(images); // Log the images object to verify
 
 export const projectsData = [
     {
@@ -43,7 +42,7 @@ export const projectsData = [
         "tools": ["ESP32", "PIR Sensors", "LDR Sensor", "Flutter", "Firebase", "MongoDB"],
         "role": "IoT Developer",
         "github": "https://github.com/Og-Strike/NeoLight",
-        "images": images["NeoLight"],
+        "images": images["Neolight"],
         "captions": ["Circuit Diagram", "Database View","Flutter App UI 1", "Flutter App UI 2", "Project Setup"]
     },
     {
