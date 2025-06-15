@@ -9,45 +9,55 @@ import {
   FaChevronRight,
 } from 'react-icons/fa';
 
-
-
 function ProjectCard({ project }) {
-    const handleImageClick = () => {
-    // Open image in new tab - we can't set title for direct image URLs
-    window.open(project.images[currentImageIndex], '_blank');
-  };
+  // ...existing code...
+  const scrollYRef = React.useRef(0);
   const [isModalOpen, setModalOpen] = React.useState(false);
   const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
   const [isHovered, setHovered] = React.useState(false);
   const [fadeState, setFadeState] = React.useState("fade-in");
-  const [zoom, setZoom] = React.useState(false);
   const [progress, setProgress] = React.useState(0);
-
-  const duration = 5000; // 5 seconds
-
+  const [isClient, setIsClient] = React.useState(false);
+  
+  const duration = 5000;
+  
+  React.useEffect(() => {
+    setIsClient(true);
+  }, []);
+  
+  const handleImageClick = () => {
+    if (typeof window !== 'undefined') {
+      window.open(project.images?.[currentImageIndex], '_blank');
+    }
+  };
+  
   const openModal = () => {
+    scrollYRef.current = window.scrollY;
     setModalOpen(true);
+    document.body.style.overflow = 'hidden';
+    setCurrentImageIndex(0); // Reset to first image on open
     setProgress(0);
   };
-
+  
   const closeModal = React.useCallback(() => {
     setModalOpen(false);
-    setZoom(false);
+    document.body.style.overflow = '';
+    setProgress(0);
   }, []);
-
+  
   const nextImage = React.useCallback(() => {
+    if (!project.images?.length) return;
     setFadeState("fade-out");
-    setZoom(false);
     setTimeout(() => {
       setCurrentImageIndex((prev) => (prev + 1) % project.images.length);
       setFadeState("fade-in");
       setProgress(0);
     }, 300);
-  }, [project.images.length]);
-
+  }, [project.images?.length]);
+  
   const prevImage = React.useCallback(() => {
+    if (!project.images?.length) return;
     setFadeState("fade-out");
-    setZoom(false);
     setTimeout(() => {
       setCurrentImageIndex((prev) =>
         (prev - 1 + project.images.length) % project.images.length
@@ -55,28 +65,28 @@ function ProjectCard({ project }) {
       setFadeState("fade-in");
       setProgress(0);
     }, 300);
-  }, [project.images.length]);
+  }, [project.images?.length]);
+  
+  // Progress bar animation effect
+React.useEffect(() => {
+  if (!isModalOpen || isHovered || !project.images?.length) return;
 
-  // Progress bar interval (increments only)
-  React.useEffect(() => {
-    if (!isModalOpen || isHovered) return;
-
-    const interval = setInterval(() => {
-      setProgress((prev) => Math.min(prev + 100, duration));
-    }, 100);
-
-    return () => clearInterval(interval);
-  }, [isModalOpen, isHovered]);
-
-  // Watch progress to trigger image switch
-  React.useEffect(() => {
-    if (progress >= duration) {
+  let start = Date.now();
+  const interval = setInterval(() => {
+    const elapsed = Date.now() - start;
+    const percent = Math.min((elapsed / duration) * 100, 100);
+    setProgress(percent);
+    if (percent >= 100) {
+      clearInterval(interval);
       setProgress(0);
-      setCurrentImageIndex((prev) => (prev + 1) % project.images.length);
+      nextImage();
     }
-  }, [progress, project.images.length]);
+  }, 100); // update every 100ms
 
-  // Handle keyboard events
+  return () => clearInterval(interval);
+}, [isModalOpen, isHovered, project.images?.length, currentImageIndex, nextImage]);
+  
+  // Keyboard navigation effect
   React.useEffect(() => {
     if (!isModalOpen) return;
     const handleKey = (e) => {
@@ -87,71 +97,68 @@ function ProjectCard({ project }) {
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
   }, [isModalOpen, nextImage, prevImage, closeModal]);
+  
+  // ...existing code...
 
   return (
     <div className="relative rounded-lg border border-[#1b2c68a0] h-full bg-gradient-to-r from-[#0d1224] to-[#0a0d37] w-full overflow-hidden animated-border">
-      {isModalOpen && (
-        <div className="absolute top-0 left-0 w-full h-full z-50 bg-black bg-opacity-70">
-          <div className="relative w-full h-full">
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#1e1e2f] p-2 md:p-4 rounded-lg w-full h-full flex flex-col items-center justify-center">
-              {/* Close */}
-              <div className="absolute top-4 right-11 z-10">
-                <button onClick={closeModal} className="text-pink-500 hover:text-red-400">
-                  <FaTimes size={20} />
-                </button>
-              </div>
+      {/* Modal */}
+{isClient && isModalOpen && project.images?.length > 0 && (
+  <div
+    className="fixed left-0 sm:w-auto w-full z-50 flex justify-center"
+    style={{ top: `${scrollYRef.current}px` }}
+  >
+    <div className="bg-[#1e1e2f] p-4 rounded-lg sm:w-auto max-w-4xl w-full mt-10">
+        
 
-              {/* Image + Zoom */}
-              <div
-                className={`transition-opacity duration-500 ${fadeState} cursor-zoom-in relative`}
-                onMouseEnter={() => setHovered(true)}
-                onMouseLeave={() => setHovered(false)}
-                onClick={handleImageClick}
+              <div className={`relative flex-grow min-h-[50vh] max-h-[60vh] flex items-center justify-center ${fadeState}`} style={{ transition: 'opacity 300ms ease-in-out' }}>
+                  <div onClick={handleImageClick}
+                        className="absolute inset-0 cursor-pointer z-0"
+                      >
+                        <Image
+                          src={project.images[currentImageIndex]}
+                          alt={`${project.name} - Image ${currentImageIndex + 1}`}
+                          fill
+                          className="object-contain"
+                          priority
+                        />
+                      </div>
+              <button
+                onClick={closeModal}
+                className="absolute top-0 right-0 text-pink-500 hover:text-red-400 z-10"
               >
-                <Image
-                  src={project.images[currentImageIndex]}
-                  alt={`project-image-${currentImageIndex}`}
-                  width={800}
-                  height={400}
-                  className={`max-w-full max-h-[30vh] object-contain rounded transition-transform duration-300 ${zoom ? 'scale-100' : 'scale-100'}`}
-                  style={{ width: 'auto', height: '30vh' }}
-                  priority={true}
-                /> 
+                <FaTimes size={24} />
+              </button>
               </div>
-
-              {/* Caption */}
-              {project.captions && (
-                <p className="text-gray-300 text-xl mt-1 italic text-center max-w-xl">
+              <div>
+                <p className=" text-sm mt-2 py-2 text-[#16f2b3] items-center text-center">
                   {project.captions[currentImageIndex]}
                 </p>
-              )}
-
-              {/* Progress Bar */}
-              <div className="w-full h-1 mt-3 bg-gray-700 rounded">
-                <div
-                  className="h-full bg-blue-400 rounded transition-all"
-                  style={{ width: `${(progress / duration) * 100}%` }}
-                ></div>
               </div>
 
-              {/* Prev/Next Controls */}
-              <div className="flex justify-between items-center mt-4 w-full px-6">
-                <button onClick={prevImage} className="text-white hover:text-gray-400 ml-6">
+              <div className="w-full h-1.5 mt-4 bg-gray-700 rounded-full overflow-hidden">
+                <div
+  className="h-full bg-blue-400 rounded-full progress-bar"
+  style={{ width: `${progress}%`, transition: 'width 100ms linear' }}
+></div>
+              </div>
+
+              <div className="flex justify-between items-center mt-4 px-4 ">
+                <button onClick={prevImage} className="p-2 text-white hover:text-gray-400">
                   <FaChevronLeft size={24} />
                 </button>
                 <span className="text-sm text-gray-300">
-                  {`${currentImageIndex + 1} / ${project.images.length}`}
+                  {currentImageIndex + 1} / {project.images.length}
                 </span>
-                <button onClick={nextImage} className="text-white hover:text-gray-400 mr-6">
+                <button onClick={nextImage} className="p-2 text-white hover:text-gray-400">
                   <FaChevronRight size={24} />
                 </button>
               </div>
             </div>
           </div>
-        </div>
       )}
 
-      {/* Project Header */}
+      {/* Header */}
       <div className="px-4 lg:px-8 py-3 lg:py-5 relative flex items-center justify-center gap-2">
         <div className="absolute left-4 top-1/2 -translate-y-1/2 flex space-x-2">
           <div className="h-3 w-3 rounded-full bg-red-400"></div>
@@ -167,6 +174,7 @@ function ProjectCard({ project }) {
               onClick={openModal}
               title="View Images"
               className="text-gray-300 hover:text-[#16f2b3] transition"
+              aria-label="View project images"
             >
               <FaEye size={16} className="sm:w-4 sm:h-4 md:w-6 md:h-6" />
             </button>
@@ -178,6 +186,7 @@ function ProjectCard({ project }) {
               rel="noopener noreferrer"
               className="text-gray-300 hover:text-[#16f2b3] transition"
               title="GitHub Repo"
+              aria-label="View GitHub repository"
             >
               <FaGithub size={16} className="sm:w-4 sm:h-4 md:w-6 md:h-6" />
             </a>
@@ -188,7 +197,7 @@ function ProjectCard({ project }) {
       {/* Code Snippet */}
       <div className="overflow-hidden border-t-[2px] border-indigo-900 px-4 lg:px-8 py-4 lg:py-8">
         <code className="font-mono text-sm">
-          <div className="blink">
+          <div className="">
             <span className="mr-2 text-pink-500">const</span>
             <span className="mr-2 text-white">project</span>
             <span className="mr-2 text-pink-500">=</span>
@@ -225,13 +234,13 @@ function ProjectCard({ project }) {
         </code>
       </div>
 
-      {/* Gradient Line Top */}
+      {/* Bottom Gradient Line */}
       <div className="flex flex-row">
         <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-pink-500 to-violet-600"></div>
         <div className="h-[1px] w-full bg-gradient-to-r from-violet-600 to-transparent"></div>
       </div>
 
-      {/* Animations */}
+      {/* Styles */}
       <style jsx>{`
         @keyframes border-flow {
           0% { background-position: 0% 50%; }
@@ -256,12 +265,21 @@ function ProjectCard({ project }) {
 
         .fade-in {
           opacity: 1;
-          transition: opacity 0.5s ease-in;
+          transition: opacity 0.3s ease-in;
         }
 
         .fade-out {
           opacity: 0;
-          transition: opacity 0.5s ease-out;
+          transition: opacity 0.3s ease-out;
+        }
+
+        .blink {
+          animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+          from, to { opacity: 1; }
+          50% { opacity: 0; }
         }
       `}</style>
     </div>
