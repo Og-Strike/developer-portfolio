@@ -305,7 +305,7 @@ function HeroSection() {
         </div>
         <div>
           <span className="ml-12 lg:ml-24 text-cyan-400">this.</span>
-          <span className="mr-2 text-white">{"skills.length"}"</span>
+          <span className="mr-2 text-white">{"skills.length"}</span>
           <span className="mr-2 text-amber-300">&gt;=</span>
           <span className="text-orange-400">5</span>
         </div>
