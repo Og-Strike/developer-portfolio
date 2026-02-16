@@ -20,9 +20,7 @@ export const skillsData = [
   'Git',
   'Flutter',
   'Dart',
-  'Microsoft Office',
-  'Bootstrap',
-  'Docker'
+  'Microsoft Office'
 ]
 
 // Choose your skills from below. Make sure it's in the same format and spelled correctly.
@@ -111,3 +109,4 @@ export const skillsData = [
   Webex
   Wordpress
 */
+
