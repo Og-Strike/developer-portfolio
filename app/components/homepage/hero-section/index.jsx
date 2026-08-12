@@ -11,7 +11,6 @@ import { FaTelegram } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa6";
 import { MdDownload } from "react-icons/md";
 import { RiContactsFill } from "react-icons/ri";
-import { SiGoogleplay } from "react-icons/si";
 import Typewriter from "typewriter-effect";
 import { useMusicPermission } from "@/app/context/MusicPermissionContext";
 
@@ -160,13 +159,6 @@ function HeroSection() {
       className="transition-all text-pink-500 hover:scale-125 duration-300"
     >
       <FaInstagram size={30} />
-    </Link>
-    <Link
-      href={personalData.googlePlay}
-      target='_blank'
-      className="transition-all text-pink-500 hover:scale-125 duration-300"
-    >
-      <SiGoogleplay size={30} />
     </Link>
     <Link
       href={personalData.telegram}
