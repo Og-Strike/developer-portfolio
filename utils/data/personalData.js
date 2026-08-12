@@ -10,7 +10,7 @@ export const personalData = {
   github: 'https://github.com/Og-Strike',
   instagram: 'https://www.instagram.com/itachi.strike/',
   linkedIn: 'https://www.linkedin.com/in/nitesh-kumar-mishra-156571254/',
-  googlePlay: 'https://play.google.com/store/apps/dev?id=7959959703084975439&hl=en-IN',
+  googlePlay: '',
   telegram: 'https://t.me/Og_Strike',
   leetcode: "https://leetcode.com/u/og_strike/",
   resume: "https://drive.google.com/file/d/1xH8Lg84qXNmIiID66W_aFFybmbliJCF4/view?usp=sharing"
