@@ -1,4 +1,3 @@
-
 import { experiences } from "@/utils/data/experience";
 import Image from "next/image";
 import { BsPersonWorkspace } from "react-icons/bs";
@@ -38,50 +37,52 @@ function Experience() {
           </div>
 
           {/* Experience Cards Container */}
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col items-center gap-6">
             {experiences.map((experience) => (
-              <GlowCard key={experience.id} identifier={`experience-${experience.id}`}>
-                <div className="p-3 relative z-10">
-                  <Image
-                    src="/blur-23.svg"
-                    alt="Hero"
-                    width={1080}
-                    height={200}
-                    className="absolute bottom-0 opacity-80"
-                  />
-                  <div className="flex justify-center">
-                    <p className="text-xs sm:text-sm text-[#16f2b3]">
-                      {experience.duration}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-x-8 px-3 py-5">
-                    <div className="text-violet-500 transition-all duration-300 hover:scale-125">
-                      <BsPersonWorkspace size={36} />
-                    </div>
-                    <div>
-                      <p className="lg:text-lg md:text-base mb-2 font-medium uppercase">
-                        {experience.title}
+              <div key={experience.id} className="w-full max-w-xl">
+                <GlowCard identifier={`experience-${experience.id}`}>
+                  <div className="p-3 relative z-10">
+                    <Image
+                      src="/blur-23.svg"
+                      alt="Hero"
+                      width={1080}
+                      height={200}
+                      className="absolute bottom-0 opacity-80"
+                    />
+                    <div className="flex justify-center">
+                      <p className="text-xs sm:text-sm text-[#16f2b3]">
+                        {experience.duration}
                       </p>
-                      <div className="flex items-center gap-2 text-sm sm:text-sm ">
-                        {experience.link ? (
-                          <a
-                            href={experience.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-1 hover:text-[#16f2b3] text-pink-500 transition-colors z-10"
-                            title="Visit"
-                          >
+                    </div>
+                    <div className="flex items-center gap-x-8 px-3 py-5">
+                      <div className="text-violet-500 transition-all duration-300 hover:scale-125">
+                        <BsPersonWorkspace size={36} />
+                      </div>
+                      <div>
+                        <p className="lg:text-lg md:text-base mb-2 font-medium uppercase">
+                          {experience.title}
+                        </p>
+                        <div className="flex items-center gap-2 text-sm sm:text-sm ">
+                          {experience.link ? (
+                            <a
+                              href={experience.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center gap-1 hover:text-[#16f2b3] text-pink-500 transition-colors z-10"
+                              title="Visit"
+                            >
+                              <span>{experience.company}</span>
+                              <FiExternalLink />
+                            </a>
+                          ) : (
                             <span>{experience.company}</span>
-                            <FiExternalLink />
-                          </a>
-                        ) : (
-                          <span>{experience.company}</span>
-                        )}
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </GlowCard>
+                </GlowCard>
+              </div>
             ))}
           </div>
         </div>
