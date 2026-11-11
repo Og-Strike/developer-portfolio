@@ -13,5 +13,5 @@ export const personalData = {
   googlePlay: '',
   telegram: 'https://t.me/Og_Strike',
   leetcode: "https://leetcode.com/u/og_strike/",
-  resume: "https://drive.google.com/file/d/1xH8Lg84qXNmIiID66W_aFFybmbliJCF4/view?usp=sharing"
+  resume: "https://drive.google.com/file/d/1ucoobNsEnaFM45moXIS6EVTT_fMgfHfJ/view?usp=sharing"
 }
