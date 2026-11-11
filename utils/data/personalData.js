@@ -12,6 +12,6 @@ export const personalData = {
   linkedIn: 'https://www.linkedin.com/in/nitesh-kumar-mishra-156571254/',
   googlePlay: '',
   telegram: 'https://t.me/Og_Strike',
-  leetcode: "https://leetcode.com/u/og_strike/",
+  leetcode: "",
   resume: "https://drive.google.com/file/d/1ucoobNsEnaFM45moXIS6EVTT_fMgfHfJ/view?usp=sharing"
 }
